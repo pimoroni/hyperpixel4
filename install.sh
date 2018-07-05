@@ -21,7 +21,7 @@ CONFIG_LINES=(
 	"display_default_lcd=1"
 	"dpi_group=2"
 	"dpi_mode=87"
-	"dpi_output_format=0x7f016"
+	"dpi_output_format=0x7f216"
 	"display_rotate=3"
 	"hdmi_timings=480 0 10 16 59 800 0 15 113 15 0 0 0 60 0 32000000 6"
 )
