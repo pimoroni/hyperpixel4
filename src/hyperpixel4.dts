@@ -44,15 +44,12 @@
             ft6236: ft6236@5d {
                 compatible = "goodix,gt911";
                 reg = <0x5d>;
-	        interrupt-parent = <&gpio>;
-	        interrupts = <27 2>;
-	        touchscreen-size-x = <800>;
-	        touchscreen-size-y = <480>;
-	        touchscreen-x-mm = <85>;
-	        touchscreen-y-mm = <51>;
-	        touchscreen-inverted-x = <1>;
-	        touchscreen-inverted-y = <1>;
-	        /*touchscreen-swapped-x-y = <0>;*/
+                interrupt-parent = <&gpio>;
+                interrupts = <27 2>;
+                touchscreen-size-x = <800>;
+                touchscreen-size-y = <480>;
+                touchscreen-x-mm = <85>;
+                touchscreen-y-mm = <51>;
             };
         };
     };
@@ -64,6 +61,13 @@
                 gpios = <&gpio 19 0>;
                 default-on;
             };
+        };
+    };
+    fragment@5 {
+        target = <&ft6236>;
+        __overlay__ {
+            touchscreen-inverted-x = <1>;
+            touchscreen-inverted-y = <1>;
         };
     };
     __symbols__ {
@@ -79,6 +83,9 @@
     __fixups__ {
         leds = "/fragment@0:target:0";
         gpio = "/fragment@1:target:0";
+    };
+    __overrides__ {
+        rotate = <0>,"-5";
     };
 };
 
