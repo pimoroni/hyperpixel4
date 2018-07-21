@@ -19,6 +19,12 @@ sudo ./install.sh
 
 ## 180 Degree Rotation
 
+Note: You *must* build the latest dtoverlay file to enable rotation support:
+
+1. Go into `src`
+2. run `make` to build a new hyperpixel4.dtbo with rotation support
+3. copy the overlay with `sudo cp hyperpixel4.dtbo /boot/overlays/`
+
 To rotate your HyperPixel4 you must edit /boot/config.txt and change the following lines:
 
 1. Change `dtoverlay=hyperpixel4` to `dtoverlay=hyperpixel4:rotate`
