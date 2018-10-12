@@ -27,8 +27,8 @@ CONFIG_LINES=(
 )
 
 if [ $(id -u) -ne 0 ]; then
-        printf "Script must be run as root. Try 'sudo ./install.sh'\n"
-        exit 1
+		printf "Script must be run as root. Try 'sudo ./install.sh'\n"
+		exit 1
 fi
 
 if [ -d "$SERVICE_PATH" ]; then
@@ -51,6 +51,7 @@ else
 fi
 
 if [ -f "$CONFIG" ]; then
+	NEWLINE=0
 	for ((i = 0; i < ${#CONFIG_LINES[@]}; i++)); do
 		CONFIG_LINE="${CONFIG_LINES[$i]}"
 		grep -e "^#$CONFIG_LINE" $CONFIG > /dev/null
@@ -60,6 +61,12 @@ if [ -f "$CONFIG" ]; then
 			STATUS=$?
 			if [ $STATUS -eq 1 ]; then
 				# Line is missing from config file
+				if [ ! $NEWLINE -eq 1 ];
+					# Add newline if this is the first new entry
+					echo "" >> $CONFIG
+					NEWLINE=1
+				fi
+				# Add the config line
 				echo "$CONFIG_LINE" >> $CONFIG
 				printf "Config: Added $CONFIG_LINE to $CONFIG\n"
 			else
