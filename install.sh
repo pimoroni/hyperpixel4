@@ -61,7 +61,7 @@ if [ -f "$CONFIG" ]; then
 			STATUS=$?
 			if [ $STATUS -eq 1 ]; then
 				# Line is missing from config file
-				if [ ! $NEWLINE -eq 1 ];
+				if [ ! $NEWLINE -eq 1 ]; then
 					# Add newline if this is the first new entry
 					echo "" >> $CONFIG
 					NEWLINE=1
