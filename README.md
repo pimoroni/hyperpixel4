@@ -1,6 +1,6 @@
 # HyperPixel 4.0" Drivers
 
-HyperPixel 4.0 is an 800x480 pixel display for the Raspberr Pi, with optional capacitive touchscreen.
+HyperPixel 4.0 is an 800x480 pixel display for the Raspberry Pi, with optional capacitive touchscreen.
 
 ## Installing / Uninstalling
 
