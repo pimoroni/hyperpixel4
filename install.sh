@@ -6,6 +6,7 @@ BINARY_NAME="hyperpixel4-init"
 BINARY_PATH="/usr/bin"
 OVERLAY_PATH="/boot/overlays"
 OVERLAY_NAME="hyperpixel4.dtbo"
+OVERLAY_SRC="hyperpixel4.dts"
 
 CONFIG="/boot/config.txt"
 
@@ -29,6 +30,15 @@ CONFIG_LINES=(
 if [ $(id -u) -ne 0 ]; then
 		printf "Script must be run as root. Try 'sudo ./install.sh'\n"
 		exit 1
+fi
+
+if [ ! -f "dist/$OVERLAY_NAME" ]; then
+	if [ ! -f "/usr/bin/dtc" ]; then
+		printf "This script requires device-tree-compiler, please \"sudo apt install device-tree-compiler\"\n";
+		exit 1
+	fi
+	printf "Notice: building $OVERLAY_NAME\n";
+	dtc -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
 fi
 
 if [ -d "$SERVICE_PATH" ]; then
@@ -73,7 +83,7 @@ if [ -f "$CONFIG" ]; then
 				printf "Skipped: $CONFIG_LINE already exists in $CONFIG\n"
 			fi
 		else
-			sed $CONFIG -i e "s/^#$CONFIG_LINE/$CONFIG_LINE/"
+			sed $CONFIG -i -e "s/^#$CONFIG_LINE/$CONFIG_LINE/"
 			printf "Config: Uncommented $CONFIG_LINE in $CONFIG\n"
 		fi
 	done
