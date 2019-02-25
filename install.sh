@@ -83,7 +83,7 @@ if [ -f "$CONFIG" ]; then
 				printf "Skipped: $CONFIG_LINE already exists in $CONFIG\n"
 			fi
 		else
-			sed $CONFIG -i e "s/^#$CONFIG_LINE/$CONFIG_LINE/"
+			sed $CONFIG -i -e "s/^#$CONFIG_LINE/$CONFIG_LINE/"
 			printf "Config: Uncommented $CONFIG_LINE in $CONFIG\n"
 		fi
 	done
