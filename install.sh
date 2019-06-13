@@ -16,15 +16,14 @@ CONFIG_LINES=(
 	"overscan_right=0"
 	"overscan_top=0"
 	"overscan_bottom=0"
-	"framebuffer_width=800"
-	"framebuffer_height=480"
+	"framebuffer_width=720"
+	"framebuffer_height=720"
 	"enable_dpi_lcd=1"
 	"display_default_lcd=1"
 	"dpi_group=2"
 	"dpi_mode=87"
-	"dpi_output_format=0x7f216"
-	"display_rotate=3"
-	"hdmi_timings=480 0 10 16 59 800 0 15 113 15 0 0 0 60 0 32000000 6"
+	"dpi_output_format=0x7f026"
+	"hdmi_timings=720 0 15 15 15 720 0 10 10 10 0 0 0 60 0 35113500 6"
 )
 
 if [ $(id -u) -ne 0 ]; then
