@@ -7,7 +7,7 @@ BINARY_PATH="/usr/bin"
 OVERLAY_PATH="/boot/overlays"
 OVERLAY_NAME="hyperpixel4.dtbo"
 OVERLAY_SRC="hyperpixel4.dts"
-UDEV_RULES="98-hyperpixel4-calibration.rules"
+UDEV_RULES="98-hyperpixel4-square-calibration.rules"
 UDEV_PATH="/etc/udev/rules.d"
 
 CONFIG="/boot/config.txt"
