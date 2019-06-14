@@ -48,8 +48,9 @@
                 interrupts = <27 2>;
                 touchscreen-size-x = <800>;
                 touchscreen-size-y = <480>;
-                touchscreen-x-mm = <85>;
-                touchscreen-y-mm = <51>;
+                touchscreen-swapped-x-y = <1>;
+                touchscreen-x-mm = <51>;
+                touchscreen-y-mm = <85>;
             };
         };
     };
@@ -70,6 +71,14 @@
             touchscreen-inverted-y = <1>;
         };
     };
+    fragment@6 { // Legacy input support
+        target = <&ft6236>;
+        __overlay__ {
+            touchscreen-size-x = <800>;
+            touchscreen-size-y = <480>;
+            touchscreen-swapped-x-y = <0>;
+        };
+    };
     __symbols__ {
         dpi18_pins = "/fragment@1/__overlay__/dpi18_pins";
     };
@@ -86,6 +95,7 @@
     };
     __overrides__ {
         rotate = <0>,"-5";
+        legacy = <0>,"+6";
     };
 };
 
