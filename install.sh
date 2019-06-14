@@ -7,6 +7,8 @@ BINARY_PATH="/usr/bin"
 OVERLAY_PATH="/boot/overlays"
 OVERLAY_NAME="hyperpixel4.dtbo"
 OVERLAY_SRC="hyperpixel4.dts"
+UDEV_RULES="98-hyperpixel4-calibration.rules"
+UDEV_PATH="/etc/udev/rules.d"
 
 CONFIG="/boot/config.txt"
 
@@ -38,6 +40,11 @@ if [ ! -f "dist/$OVERLAY_NAME" ]; then
 	fi
 	printf "Notice: building $OVERLAY_NAME\n";
 	dtc -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
+fi
+
+if [ -d "$UDEV_PATH" ]; then
+	cp dist/$UDEV_RULES $UDEV_PATH
+	printf "Installed: $UDEV_PATH/$UDEV_RULES\n"
 fi
 
 #if [ -d "$SERVICE_PATH" ]; then

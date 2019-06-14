@@ -1,0 +1,1 @@
+ATTRS{name}=="generic ft5x06 (11)", ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"
