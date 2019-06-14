@@ -40,17 +40,17 @@ if [ ! -f "dist/$OVERLAY_NAME" ]; then
 	dtc -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
 fi
 
-if [ -d "$SERVICE_PATH" ]; then
-	cp dist/$BINARY_NAME $BINARY_PATH
-	cp dist/$SERVICE_NAME $SERVICE_PATH
-	systemctl daemon-reload
-	systemctl enable $SERVICE_NAME
-	systemctl start $SERVICE_NAME
-	printf "Installed: $BINARY_PATH/$BINARY_NAME\n"
-	printf "Installed: $SERVICE_PATH/$SERVICE_NAME\n"
-else
-	printf "Warning: cannot find $SERVICE_PATH for $SERVICE_NAME\n"
-fi
+#if [ -d "$SERVICE_PATH" ]; then
+#	cp dist/$BINARY_NAME $BINARY_PATH
+#	cp dist/$SERVICE_NAME $SERVICE_PATH
+#	systemctl daemon-reload
+#	systemctl enable $SERVICE_NAME
+#	systemctl start $SERVICE_NAME
+#	printf "Installed: $BINARY_PATH/$BINARY_NAME\n"
+#	printf "Installed: $SERVICE_PATH/$SERVICE_NAME\n"
+#else
+#	printf "Warning: cannot find $SERVICE_PATH for $SERVICE_NAME\n"
+#fi
 
 if [ -d "$OVERLAY_PATH" ]; then
 	cp dist/$OVERLAY_NAME $OVERLAY_PATH
