@@ -12,19 +12,11 @@ CONFIG="/boot/config.txt"
 
 CONFIG_LINES=(
 	"dtoverlay=hyperpixel4"
-	"overscan_left=0"
-	"overscan_right=0"
-	"overscan_top=0"
-	"overscan_bottom=0"
-	"framebuffer_width=800"
-	"framebuffer_height=480"
 	"enable_dpi_lcd=1"
-	"display_default_lcd=1"
 	"dpi_group=2"
 	"dpi_mode=87"
 	"dpi_output_format=0x7f216"
-	"display_rotate=3"
-	"hdmi_timings=480 0 10 16 59 800 0 15 113 15 0 0 0 60 0 32000000 6"
+	"dpi_timings=480 0 10 16 59 800 0 15 113 15 0 0 0 60 0 32000000 6"
 )
 
 if [ $(id -u) -ne 0 ]; then

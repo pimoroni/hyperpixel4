@@ -3,18 +3,17 @@
 / {
     compatible = "brcm,bcm2708";
     fragment@0 {
-        target = <0xdeadbeef>;
+        target = <&fb>;
         __overlay__ {
             pinctrl-names = "default";
-            pinctrl-0 = <0x1>;
+            pinctrl-0 = <&dpi18_pins>;
         };
     };
     fragment@1 {
-        target = <0xdeadbeef>;
+        target = <&gpio>;
         __overlay__ {
             dpi18_pins {
-//              brcm,pins = <0x0 0x1 0x2 0x3 0x4 0x5 0x6 0x7 0x8 0x9    0xa 0xb 0xc 0xd 0xe 0xf 0x10 0x11 0x12 0x13       0x14 0x15>;
-                brcm,pins = <0x0 0x1 0x2 0x3 0x4 0x5 0x6 0x7 0x8 0x9    0xc 0xd 0xe 0xf 0x10 0x11     0x14 0x15 0x16 0x17 0x18 0x19>;
+                brcm,pins = <0 1 2 3 4 5 6 7 8 9 12 13 14 15 16 17 20 21 22 23 24 25>;
                 brcm,function = <0x6>;
                 brcm,pull = <0x0>;
                 phandle = <0x1>;
@@ -41,33 +40,16 @@
             /* needed to avoid dtc warning */
             #address-cells = <1>;
             #size-cells = <0>;
-            ft6236: ft6236@5d {
+            ft6236: ft6236@14 {
                 compatible = "goodix,gt911";
-                reg = <0x5d>;
+                reg = <0x14>;
                 interrupt-parent = <&gpio>;
                 interrupts = <27 2>;
-                touchscreen-size-x = <800>;
-                touchscreen-size-y = <480>;
+                touchscreen-size-x = <480>;
+                touchscreen-size-y = <800>;
                 touchscreen-x-mm = <85>;
                 touchscreen-y-mm = <51>;
             };
-        };
-    };
-    fragment@4 {
-        target-path = "/";
-        __overlay__ {
-            rpi_backlight: rpi_backlight {
-                compatible = "gpio-backlight";
-                gpios = <&gpio 19 0>;
-                default-on;
-            };
-        };
-    };
-    fragment@5 {
-        target = <&ft6236>;
-        __overlay__ {
-            touchscreen-inverted-x = <1>;
-            touchscreen-inverted-y = <1>;
         };
     };
     __symbols__ {
@@ -80,12 +62,4 @@
             };
         };
     };
-    __fixups__ {
-        leds = "/fragment@0:target:0";
-        gpio = "/fragment@1:target:0";
-    };
-    __overrides__ {
-        rotate = <0>,"-5";
-    };
 };
-
