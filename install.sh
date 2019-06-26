@@ -12,6 +12,7 @@ CONFIG="/boot/config.txt"
 
 CONFIG_LINES=(
 	"dtoverlay=hyperpixel4"
+	"gpio=0-25=a2"
 	"enable_dpi_lcd=1"
 	"dpi_group=2"
 	"dpi_mode=87"
