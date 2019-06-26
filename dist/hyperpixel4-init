@@ -46,10 +46,12 @@ COMMANDS = [
     0x035, 0x100, 0x011, 0x100,    -1, 0x029, 0x100,    -1
 ]
 
+
 def setup_pins():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup([CLK, MOSI, CS], GPIO.OUT)
     GPIO.output(CS, 1)
+
 
 def send_bits(data, count):
     mask = 1 << (count - 1)
@@ -63,10 +65,12 @@ def send_bits(data, count):
         time.sleep(0.00001)
     GPIO.output(MOSI, 0)
 
+
 def write(command):
     GPIO.output(CS, 0)
     send_bits(command, 9)
     GPIO.output(CS, 1)
+
 
 def setup_lcd():
     print("Setitng up LCD...")
@@ -77,12 +81,8 @@ def setup_lcd():
         write(COMMANDS[x])
         # print("0x{:03x}".format(COMMANDS[x]))
 
-def setup_backlight():
-    print("Setting up backlight...")
-    subprocess.call(["raspi-gpio", "set", "19", "op", "pn", "dh"])
 
 if __name__ == "__main__":
     setup_pins()
     setup_lcd()
     GPIO.cleanup()
-    setup_backlight()

@@ -6,7 +6,7 @@
         target = <&fb>;
         __overlay__ {
             pinctrl-names = "default";
-            pinctrl-0 = <&dpi18_pins>;
+            pinctrl-0 = <0x1>;
         };
     };
     fragment@1 {
@@ -23,6 +23,16 @@
     fragment@2 {
         target-path = "/";
         __overlay__ {
+            rpi_backlight: rpi_backlight {
+                compatible = "gpio-backlight";
+                gpios = <&gpio 19 0>;
+                default-on;
+            };
+        };
+    };
+    fragment@3 {
+        target-path = "/";
+        __overlay__ {
             i2c_gpio: i2c@0 {
                 compatible = "i2c-gpio";
                 gpios = <&gpio 10 0 /* sda */
@@ -34,7 +44,7 @@
             };
         };
     };
-    fragment@3 {
+    fragment@4 {
         target = <&i2c_gpio>;
         __overlay__ {
             /* needed to avoid dtc warning */
@@ -47,8 +57,11 @@
                 interrupts = <27 2>;
                 touchscreen-size-x = <480>;
                 touchscreen-size-y = <800>;
-                touchscreen-x-mm = <85>;
-                touchscreen-y-mm = <51>;
+                touchscreen-x-mm = <51>;
+                touchscreen-y-mm = <85>;
+                touchscreen-swapped-x-y = <1>;
+                touchscreen-inverted-x = <1>;
+                touchscreen-inverted-y = <1>;
             };
         };
     };
@@ -61,5 +74,14 @@
                 pinctrl-0 = <0x0>;
             };
         };
+    };
+     __fixups__ {
+        leds = "/fragment@0:target:0";
+        gpio = "/fragment@1:target:0";
+    };
+    __overrides__ {
+        touchscreen-inverted-x = <&ft6236>,"touchscreen-inverted-x:0";
+        touchscreen-inverted-y = <&ft6236>,"touchscreen-inverted-y:0";
+        touchscreen-swapped-x-y = <&ft6236>,"touchscreen-swapped-x-y:0";
     };
 };
