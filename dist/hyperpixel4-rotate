@@ -7,7 +7,7 @@ DISP_FILE="/usr/share/dispsetup.sh"
 
 function set_matrix {
     printf "Setting matrix: $1 $2 $3 $4 $5 $6\n";
-    xinput set-prop "$DEVICE" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 1
+    #xinput set-prop "$DEVICE" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 1
     xinput set-prop "$DEVICE" "libinput Calibration Matrix" $1 $2 $3 $4 $5 $6 0 0 1
     
     printf "Saving touch settings to $UDEV_FILE\n";
