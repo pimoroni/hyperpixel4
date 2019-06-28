@@ -3,6 +3,7 @@
 SERVICE_NAME="hyperpixel4-init.service"
 SERVICE_PATH="/etc/systemd/system"
 BINARY_NAME="hyperpixel4-init"
+ROTATE_NAME="hyperpixel4-rotate"
 BINARY_PATH="/usr/bin"
 OVERLAY_PATH="/boot/overlays"
 OVERLAY_NAME="hyperpixel4.dtbo"
@@ -33,6 +34,8 @@ if [ ! -f "dist/$OVERLAY_NAME" ]; then
 	printf "Notice: building $OVERLAY_NAME\n";
 	dtc -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
 fi
+
+cp dist/$ROTATE_NAME $BINARY_PATH
 
 if [ -d "$SERVICE_PATH" ]; then
 	cp dist/$BINARY_NAME $BINARY_PATH
