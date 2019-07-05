@@ -59,10 +59,25 @@
                 touchscreen-size-y = <800>;
                 touchscreen-x-mm = <51>;
                 touchscreen-y-mm = <85>;
-                touchscreen-swapped-x-y = <1>;
-                touchscreen-inverted-x = <1>;
-                touchscreen-inverted-y = <1>;
             };
+        };
+    };
+    fragment@5 {
+        target = <&ft6236>;
+        __dormant__ {
+            touchscreen-swapped-x-y;
+        };
+    };
+    fragment@6 {
+        target = <&ft6236>;
+        __overlay__ {
+            touchscreen-inverted-x;
+        };
+    };
+    fragment@7 {
+        target = <&ft6236>;
+        __dormant__ {
+            touchscreen-inverted-y;
         };
     };
     __symbols__ {
@@ -75,13 +90,9 @@
             };
         };
     };
-     __fixups__ {
-        leds = "/fragment@0:target:0";
-        gpio = "/fragment@1:target:0";
-    };
     __overrides__ {
-        touchscreen-inverted-x = <&ft6236>,"touchscreen-inverted-x:0";
-        touchscreen-inverted-y = <&ft6236>,"touchscreen-inverted-y:0";
-        touchscreen-swapped-x-y = <&ft6236>,"touchscreen-swapped-x-y:0";
+        touchscreen-inverted-x = <0>,"-6";
+        touchscreen-inverted-y = <0>,"+7";
+        touchscreen-swapped-x-y = <0>,"+5";
     };
 };

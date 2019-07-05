@@ -88,4 +88,4 @@ else
 	printf "Please add $OVERLAY_CONFIG to your config.txt\n"
 fi
 
-
+printf "Use 'hyperpixel4-rotate left/right/normal/inverted' to rotate your display!\n"
