@@ -1,9 +1,8 @@
 #!/bin/bash
 
-SERVICE_NAME="hyperpixel4-init.service"
 SERVICE_PATH="/etc/systemd/system"
-BINARY_NAME="hyperpixel4-init"
 BINARY_PATH="/usr/bin"
+ROTATE_NAME="hyperpixel4-rotate"
 OVERLAY_PATH="/boot/overlays"
 OVERLAY_NAME="hyperpixel4.dtbo"
 OVERLAY_SRC="hyperpixel4.dts"
@@ -14,18 +13,12 @@ CONFIG="/boot/config.txt"
 
 CONFIG_LINES=(
 	"dtoverlay=hyperpixel4"
-	"overscan_left=0"
-	"overscan_right=0"
-	"overscan_top=0"
-	"overscan_bottom=0"
-	"framebuffer_width=720"
-	"framebuffer_height=720"
+    "gpio=0-25=a2"
 	"enable_dpi_lcd=1"
-	"display_default_lcd=1"
 	"dpi_group=2"
 	"dpi_mode=87"
-	"dpi_output_format=0x7f026"
-	"hdmi_timings=720 0 15 15 15 720 0 10 10 10 0 0 0 60 0 35113500 6"
+	"dpi_output_format=0x7f226"
+	"dpi_timings=720 0 15 15 15 720 0 10 10 10 0 0 0 60 0 35113500 6"
 )
 
 if [ $(id -u) -ne 0 ]; then
@@ -42,22 +35,12 @@ if [ ! -f "dist/$OVERLAY_NAME" ]; then
 	dtc -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
 fi
 
+cp dist/$ROTATE_NAME $BINARY_PATH
+
 if [ -d "$UDEV_PATH" ]; then
 	cp dist/$UDEV_RULES $UDEV_PATH
 	printf "Installed: $UDEV_PATH/$UDEV_RULES\n"
 fi
-
-#if [ -d "$SERVICE_PATH" ]; then
-#	cp dist/$BINARY_NAME $BINARY_PATH
-#	cp dist/$SERVICE_NAME $SERVICE_PATH
-#	systemctl daemon-reload
-#	systemctl enable $SERVICE_NAME
-#	systemctl start $SERVICE_NAME
-#	printf "Installed: $BINARY_PATH/$BINARY_NAME\n"
-#	printf "Installed: $SERVICE_PATH/$SERVICE_NAME\n"
-#else
-#	printf "Warning: cannot find $SERVICE_PATH for $SERVICE_NAME\n"
-#fi
 
 if [ -d "$OVERLAY_PATH" ]; then
 	cp dist/$OVERLAY_NAME $OVERLAY_PATH
