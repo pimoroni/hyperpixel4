@@ -50,6 +50,9 @@ else
 fi
 
 if [ -f "$CONFIG" ]; then
+	printf "Disabling i2c and SPI!\n"
+	raspi-config nonint do_spi 1
+	raspi_config nonint do_i2c 1
 	NEWLINE=0
 	for ((i = 0; i < ${#CONFIG_LINES[@]}; i++)); do
 		CONFIG_LINE="${CONFIG_LINES[$i]}"
@@ -79,6 +82,9 @@ if [ -f "$CONFIG" ]; then
 else
 	printf "Warning: unable to find $CONFIG, is /boot not mounted?\n"
 	printf "Please add $OVERLAY_CONFIG to your config.txt\n"
+	printf "Make sure you also disable i2c and SPI\n"
 fi
+
+printf "\nAll done!\n*** Make sure you stop and disable any running services or scripts which use GPIO! ***\n\n"
 
 
