@@ -31,3 +31,17 @@ This command will update your touch settings and screen configuration settings t
 * inverted - portrait, USB ports on bottom
 
 If you want to change the position of your HyperPixel4 in a multi-display setup, you can use "Screen Configuration" as normal.
+
+## Touch rotation
+
+If you're having trouble with your touch being 180 degrees rotated to your screen, or need to rotate the touch for other reasons you can use some additional arguments for the dtoverlay in config.txt, these are:
+
+* `touchscreen-inverted-x`
+* `touchscreen-inverted-y`
+* `touchscreen-swapped-x-y`
+
+For example, to rotate touch 180 degrees you want to invert both the x and y axis, by changing the `dtoverlay=hyperpixel4` line in your `/boot/config.txt` to:
+
+```
+dtoverlay=hyperpixel4,touchscreen-inverted-x,touchscreen-inverted-y
+```
