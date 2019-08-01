@@ -13,7 +13,7 @@ CONFIG="/boot/config.txt"
 
 CONFIG_LINES=(
 	"dtoverlay=hyperpixel4"
-    "gpio=0-25=a2"
+	"gpio=0-25=a2"
 	"enable_dpi_lcd=1"
 	"dpi_group=2"
 	"dpi_mode=87"
@@ -52,7 +52,7 @@ fi
 if [ -f "$CONFIG" ]; then
 	printf "Disabling i2c and SPI!\n"
 	raspi-config nonint do_spi 1
-	raspi_config nonint do_i2c 1
+	raspi-config nonint do_i2c 1
 	NEWLINE=0
 	for ((i = 0; i < ${#CONFIG_LINES[@]}; i++)); do
 		CONFIG_LINE="${CONFIG_LINES[$i]}"
