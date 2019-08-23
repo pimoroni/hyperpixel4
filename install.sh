@@ -12,6 +12,8 @@ CONFIG="/boot/config.txt"
 
 CONFIG_LINES=(
 	"dtoverlay=hyperpixel4"
+	"dtparam=touchscreen-swapped-x-y"
+	"dtparam=touchscreen-inverted-x"
 	"overscan_left=0"
 	"overscan_right=0"
 	"overscan_top=0"
@@ -24,6 +26,7 @@ CONFIG_LINES=(
 	"dpi_mode=87"
 	"dpi_output_format=0x7f216"
 	"display_rotate=3"
+	"dpi_timings=480 0 10 16 59 800 0 15 113 15 0 0 0 60 0 32000000 6"
 	"hdmi_timings=480 0 10 16 59 800 0 15 113 15 0 0 0 60 0 32000000 6"
 )
 
