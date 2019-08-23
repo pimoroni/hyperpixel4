@@ -64,19 +64,19 @@
     };
     fragment@5 {
         target = <&ft6236>;
-        __dormant__ {
+        __overlay__ {
             touchscreen-swapped-x-y;
         };
     };
     fragment@6 {
         target = <&ft6236>;
-        __overlay__ {
+        __dormant__ {
             touchscreen-inverted-x;
         };
     };
     fragment@7 {
         target = <&ft6236>;
-        __dormant__ {
+        __overlay__ {
             touchscreen-inverted-y;
         };
     };
@@ -91,8 +91,8 @@
         };
     };
     __overrides__ {
-        touchscreen-inverted-x = <0>,"-6";
-        touchscreen-inverted-y = <0>,"+7";
-        touchscreen-swapped-x-y = <0>,"+5";
+        touchscreen-inverted-x = <0>,"+6";
+        touchscreen-inverted-y = <0>,"-7";
+        touchscreen-swapped-x-y = <0>,"-5";
     };
 };
