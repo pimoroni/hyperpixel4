@@ -73,7 +73,7 @@ def write(command):
 
 
 def setup_lcd():
-    print("Setitng up LCD...")
+    print("Setting up HyperPixel4...")
     for x in range(len(COMMANDS)):
         if COMMANDS[x] == -1:
             time.sleep(WAIT)
