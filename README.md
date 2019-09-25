@@ -35,7 +35,7 @@ Then `cd hyperpixel4` and run `sudo ./install.sh` to install it.
 
 ## Rotation
 
-# Rotation on Pi 4
+### Rotation on Pi 4
 
 HyperPixel4 is a portait display, so on first boot it will start in portrait mode with the USB ports at the top.
 
@@ -69,7 +69,7 @@ hyperpixel4-rotate inverted
 
 If you're running this command over SSH you should prefix it with `DISPLAY=:0.0`
 
-# 180 Degree Rotation on Pi 3
+#### 180 Degree Rotation on Pi 3
 
 Note: You *must* build the latest dtoverlay file to enable rotation support:
 
