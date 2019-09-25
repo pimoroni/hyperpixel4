@@ -6,3 +6,6 @@ install:
 
 test:
 	dtoverlay hyperpixel4.dtbo
+
+init:
+	gcc -o hyperpixel4-init -static hyperpixel4-init.c -lgpiod
