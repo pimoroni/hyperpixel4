@@ -1,6 +1,6 @@
 # HyperPixel 4.0" Drivers
 
-HyperPixel 4.0 is an 800x480 pixel display for the Raspberry Pi, with optional capacitive touchscreen.
+HyperPixel 4.0 is an 800x480 or 720x720 pixel display for the Raspberry Pi, with optional capacitive touchscreen.
 
 ## Installing / Uninstalling
 
@@ -14,16 +14,16 @@ curl -sSL get.pimoroni.com https://get.pimoroni.com/hyperpixel4 | bash
 
 When prompted, pick the combination of Pi and touchscreen that you're planning to use.
 
-Note: A HyperPixel4 setup for Pi 3 will not readily work if you move it over to a Pi 4, you should run this installer again to update the drivers.
+Note: A HyperPixel4 setup for Pi 3B+ or earlier will not readily work if you move it over to a Pi 4, you should run this installer again to update the drivers.
 
 ### Manual Installation
 
 Here's a list of active branches and which Pi/display combination they support:
 
-* `pi3` - Pi 3, HyperPixel4 Rectangular
-* `pi4` - Pi 4, HyperPixel4 Rectangular, use `hyperpixel4-rotate` to rotate once installed
-* `square` - Pi 3, HyperPixel4 Square
-* `square-pi4` - Pi 4, HyperPixel4 Square
+* [pi3](https://github.com/pimoroni/hyperpixel4/tree/pi3) - Pi 3B+ and earlier, HyperPixel4 Rectangular
+* [pi4](https://github.com/pimoroni/hyperpixel4/tree/pi4) - Pi 4, HyperPixel4 Rectangular, use `hyperpixel4-rotate` to rotate once installed
+* [square](https://github.com/pimoroni/hyperpixel4/tree/square) - Pi 3B+ and earlier, HyperPixel4 Square
+* [square-pi4](https://github.com/pimoroni/hyperpixel4/tree/square-pi4)  - Pi 4, HyperPixel4 Square
 
 To clone a specific branch to your Pi, run:
 
