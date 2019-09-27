@@ -20,7 +20,7 @@ Note: A HyperPixel4 setup for Pi 3 will not readily work if you move it over to 
 
 Here's a list of active branches and which Pi/display combination they support:
 
-* `master` - Pi 3, HyperPixel4 Rectangular
+* `pi3` - Pi 3, HyperPixel4 Rectangular
 * `pi4` - Pi 4, HyperPixel4 Rectangular, use `hyperpixel4-rotate` to rotate once installed
 * `square` - Pi 3, HyperPixel4 Square
 * `square-pi4` - Pi 4, HyperPixel4 Square
