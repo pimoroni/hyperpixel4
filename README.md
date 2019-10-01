@@ -6,10 +6,10 @@ These drivers are for the Raspberry Pi 4 specifically, and include new tools to 
 
 ## Installing / Uninstalling
 
-First, clone this GitHub repository to your Pi:
+First, clone this GitHub repository branch to your Pi:
 
 ```
-git clone https://github.com/pimoroni/hyperpixel4
+git clone https://github.com/pimoroni/hyperpixel4 -b pi4
 ```
 
 Then run the installer to install:
