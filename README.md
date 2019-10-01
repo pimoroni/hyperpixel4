@@ -4,10 +4,10 @@ HyperPixel 4.0 Square is an 720x720 pixel display for the Raspberry Pi, with opt
 
 ## Installing / Uninstalling
 
-First, clone this GitHub repository to your Pi:
+First, clone this GitHub repository branch to your Pi:
 
 ```
-git clone https://github.com/pimoroni/hyperpixel4
+git clone https://github.com/pimoroni/hyperpixel4 -b square-pi4
 ```
 
 Then run the installer to install:
@@ -20,8 +20,6 @@ sudo ./install.sh
 ## Rotation
 
 It's square. Just turn it around.
-
-### Rotation on Pi 4
 
 On Pi 4 we can take advantage of the rotation available in Display Configuration, and provide you with a command for setting both display and touch rotation together.
 
