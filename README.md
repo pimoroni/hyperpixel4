@@ -1,6 +1,6 @@
-# HyperPixel 4.0" Drivers
+# HyperPixel 4.0" Square Drivers for Raspberry Pi 4
 
-HyperPixel 4.0 is an 800x480 pixel display for the Raspberry Pi, with optional capacitive touchscreen.
+HyperPixel 4.0 Square is an 720x720 pixel display for the Raspberry Pi, with optional capacitive touchscreen.
 
 ## Installing / Uninstalling
 
@@ -17,19 +17,21 @@ cd hyperpixel4
 sudo ./install.sh
 ```
 
-## 180 Degree Rotation
+## Rotation
 
-Note: You *must* build the latest dtoverlay file to enable rotation support:
+It's square. Just turn it around.
 
-1. Go into `src`
-2. run `make` to build a new hyperpixel4.dtbo with rotation support
-3. copy the overlay with `sudo cp hyperpixel4.dtbo /boot/overlays/`
+### Rotation on Pi 4
 
-To rotate your HyperPixel4 you must edit /boot/config.txt and change the following lines:
+On Pi 4 we can take advantage of the rotation available in Display Configuration, and provide you with a command for setting both display and touch rotation together.
 
-1. Change `dtoverlay=hyperpixel4` to `dtoverlay=hyperpixel4:rotate`
-2. Change `display_rotate=3` to `display_rotate=1`
+To rotate HyperPixel4 on a Pi 4 use the `hyperpixel4-rotate` command.
 
-This will rotate both the display and the touchscreen input to match.
+```
+hyperpixel4-rotate left
+hyperpixel4-rotate left
+hyperpixel4-rotate normal
+hyperpixel4-rotate inverted
+```
 
-If you're using a non-touchscreen HyperPixel4 you need only change `display_rotate`.
+If you're running this command over SSH you should prefix it with `DISPLAY=:0.0`
