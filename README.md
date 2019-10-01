@@ -9,7 +9,7 @@ This repository contains several branches for different combinations of Pi and H
 You should use our one-line installer to install HyperPixel4 Rectangular and Square:
 
 ```
-curl -sSL get.pimoroni.com https://get.pimoroni.com/hyperpixel4 | bash
+curl -sSL https://get.pimoroni.com/hyperpixel4 | bash
 ```
 
 When prompted, pick the combination of Pi and touchscreen that you're planning to use.
