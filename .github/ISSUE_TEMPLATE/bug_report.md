@@ -8,12 +8,15 @@ assignees: ''
 ---
 
 **Describe the bug**
+
 What's gone wrong?
 
 **To Reproduce**
+
 What install steps did you go through so far? Did you install from GitHub or use our one-line-installer?
 
 **Your HyperPixel 4**
+
 Let us know which HyperPixel 4 board you're using. Note: if you're having a problem with the original HyperPixel you should go to: https://github.com/pimoroni/hyperpixel
 
 1. Is it Square or Rectangular?
@@ -22,6 +25,7 @@ Let us know which HyperPixel 4 board you're using. Note: if you're having a prob
 4. How is it connected to your Pi
 
 **Your Raspberry Pi**
+
 Give as much detail about your Pi and OS as possible. We only officially support Raspbian, but might be able to point you in the right direction if the problem is with another OS.
 
 1. What model of Raspberry Pi are you using (the result of `cat /proc/cpuinfo | grep Revision` can tell us this exactly
