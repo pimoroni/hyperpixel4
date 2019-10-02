@@ -36,13 +36,35 @@ Give as much detail about your Pi and OS as possible. We only officially support
 
 If you're having a problem with touch, try checking `dmesg` for related errors:
 
-`dmesg | grep Goodix` for HyperPixel 4.0" Rectangular
-`dmesg | grep ft5` for HyperPixel 4.0" Square
+* `dmesg | grep Goodix` for HyperPixel 4.0" Rectangular
+* `dmesg | grep ft5` for HyperPixel 4.0" Square
 
 And check i2c is working:
 
-`ls /dev/i2c-`
+`ls /dev/i2c-*`
+
+You should see something like:
+
+```text
+pi@raspberrypi:~ $ ls /dev/i2c-*
+/dev/i2c-7
+```
 
 And your HyperPixel 4 touch is showing up (there should be an address blocked out with UU in the below command):
 
-`sudo i2cdetect -y X` ( where X is the number of i2c bus found in the command above)
+`i2cdetect -y X` ( where X is the number of i2c bus found in the command above)
+
+For example:
+
+```text
+pi@raspberrypi:~ $ i2cdetect -y 7
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- UU -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --
+```
