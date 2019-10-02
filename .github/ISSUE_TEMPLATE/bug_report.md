@@ -24,7 +24,7 @@ Let us know which HyperPixel 4 board you're using. Note: if you're having a prob
 **Your Raspberry Pi*
 Give as much detail about your Pi and OS as possible. We only officially support Raspbian, but might be able to point you in the right direction if the problem is with another OS.
 
-1. What model of Raspberry Pi are you using (the result of `cat /proc/infoinfo | grep Revision` can tell us this exactly
+1. What model of Raspberry Pi are you using (the result of `cat /proc/cpuinfo | grep Revision` can tell us this exactly
 2. Which OS release are you using: `lsb_release --description` and `uname -r`
 3. Is this a fresh OS setup, or one you might have previously installed scripts/add-ons on?
 
