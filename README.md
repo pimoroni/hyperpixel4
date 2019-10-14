@@ -27,10 +27,10 @@ To keep your touchscreen rotated with the display, you should rotate HyperPixel4
 
 This command will update your touch settings and screen configuration settings to match, and you can rotate between four modes: left, right, normal, inverted.
 
-* left - landscape, power/HDMI on bottom
-* right - landscape, power/HDMI on top
-* normal - portrait, USB ports on top
-* inverted - portrait, USB ports on bottom
+* `hyperpixel4-rotate left` - landscape, power/HDMI on bottom
+* `hyperpixel4-rotate right` - landscape, power/HDMI on top
+* `hyperpixel4-rotate normal` - portrait, USB ports on top
+* `hyperpixel4-rotate inverted` - portrait, USB ports on bottom
 
 This command changes the `display_rotate` parameter in `/boot/config.txt` and changes the touchscreen calibration dropped into `/etc/udev/rules.d/`.
 
