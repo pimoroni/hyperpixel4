@@ -4,13 +4,17 @@ HyperPixel 4.0 is an 800x480 pixel display for the Raspberry Pi, with optional c
 
 ## Installing / Uninstalling
 
-First, clone this GitHub repository to your Pi:
+1. Make sure you're running Raspbian Buster or Raspbian Stretch.
+
+2. Update your Pi with `sudo apt update` and `sudo apt upgrade`.
+
+3. Clone this GitHub repository to your Pi:
 
 ```
-git clone https://github.com/pimoroni/hyperpixel4
+git clone https://github.com/pimoroni/hyperpixel4 -b pi3
 ```
 
-Then run the installer to install:
+4. Then run the installer to install:
 
 ```
 cd hyperpixel4
