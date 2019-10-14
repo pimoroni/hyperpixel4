@@ -3,6 +3,7 @@
 SERVICE_NAME="hyperpixel4-init.service"
 SERVICE_PATH="/etc/systemd/system"
 BINARY_NAME="hyperpixel4-init"
+ROTATE_NAME="hyperpixel4-rotate"
 BINARY_PATH="/usr/bin"
 OVERLAY_PATH="/boot/overlays"
 OVERLAY_NAME="hyperpixel4.dtbo"
@@ -16,14 +17,12 @@ CONFIG_LINES=(
 	"overscan_right=0"
 	"overscan_top=0"
 	"overscan_bottom=0"
-	"framebuffer_width=800"
-	"framebuffer_height=480"
 	"enable_dpi_lcd=1"
 	"display_default_lcd=1"
+	"display_rotate=0"
 	"dpi_group=2"
 	"dpi_mode=87"
 	"dpi_output_format=0x7f216"
-	"display_rotate=3"
 	"hdmi_timings=480 0 10 16 59 800 0 15 113 15 0 0 0 60 0 32000000 6"
 )
 
@@ -51,6 +50,11 @@ if [ -d "$SERVICE_PATH" ]; then
 	printf "Installed: $SERVICE_PATH/$SERVICE_NAME\n"
 else
 	printf "Warning: cannot find $SERVICE_PATH for $SERVICE_NAME\n"
+fi
+
+if [ -d "$BINARY_PATH" ]; then
+	cp dist/$ROTATE_NAME $BINARY_PATH
+	printf "Installed: $BINARY_PATH/$ROTATE_NAME\n"
 fi
 
 if [ -d "$OVERLAY_PATH" ]; then
@@ -92,4 +96,8 @@ else
 	printf "Please add $OVERLAY_CONFIG to your config.txt\n"
 fi
 
-
+printf "\nBefore rebooting, use 'hyperpixel4-rotate left/right/normal/inverted' to rotate your display!\n\n"
+printf "  left - Landscape, power/HDMI on bottom\n"
+printf "  right - Landscape, power/HDMI on top\n"
+printf "  normal - Portrait, USB ports on top\n"
+printf "  inverted - Portrait, USB ports on bottom\n\n"
