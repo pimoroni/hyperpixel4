@@ -1,6 +1,8 @@
-# HyperPixel 4.0" Drivers
+# HyperPixel 4.0" Drivers for Raspberry Pi 3B+ or older
 
 HyperPixel 4.0 is an 800x480 pixel display for the Raspberry Pi, with optional capacitive touchscreen.
+
+These drivers are for Raspberry Pi models before the Pi 3B+.
 
 ## Installing / Uninstalling
 
@@ -47,4 +49,3 @@ For example, to rotate touch 180 degrees you want to invert both the x and y axi
 ```
 dtoverlay=hyperpixel4,touchscreen-inverted-x,touchscreen-inverted-y
 ```
-
