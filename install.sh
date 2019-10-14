@@ -96,4 +96,8 @@ else
 	printf "Please add $OVERLAY_CONFIG to your config.txt\n"
 fi
 
-printf "Use 'hyperpixel4-rotate left/right/normal/inverted' to rotate your display!\n"
+printf "\nBefore rebooting, use 'hyperpixel4-rotate left/right/normal/inverted' to rotate your display!\n\n"
+printf "  left - Landscape, power/HDMI on bottom\n"
+printf "  right - Landscape, power/HDMI on top\n"
+printf "  normal - Portrait, USB ports on top\n"
+printf "  inverted - Portrait, USB ports on bottom\n\n"
