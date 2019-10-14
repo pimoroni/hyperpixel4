@@ -17,19 +17,30 @@ cd hyperpixel4
 sudo ./install.sh
 ```
 
-## 180 Degree Rotation
+## Rotation
 
-Note: You *must* build the latest dtoverlay file to enable rotation support:
+To keep your touchscreen rotated with the display, you should rotate HyperPixel4 using the `hyperpixel4-rotate` command rather than "Screen Configuration."
 
-1. Go into `src`
-2. run `make` to build a new hyperpixel4.dtbo with rotation support
-3. copy the overlay with `sudo cp hyperpixel4.dtbo /boot/overlays/`
+This command will update your touch settings and screen configuration settings to match, and you can rotate between four modes: left, right, normal, inverted.
 
-To rotate your HyperPixel4 you must edit /boot/config.txt and change the following lines:
+* left - landscape, power/HDMI on bottom
+* right - landscape, power/HDMI on top
+* normal - portrait, USB ports on top
+* inverted - portrait, USB ports on bottom
 
-1. Change `dtoverlay=hyperpixel4` to `dtoverlay=hyperpixel4:rotate`
-2. Change `display_rotate=3` to `display_rotate=1`
+This command changes the `display_rotate` parameter in `/boot/config.txt` and changes the touchscreen calibration dropped into `/etc/udev/rules.d/`.
 
-This will rotate both the display and the touchscreen input to match.
+## Touch rotation
 
-If you're using a non-touchscreen HyperPixel4 you need only change `display_rotate`.
+If you're having trouble with your touch being 180 degrees rotated to your screen, or need to rotate the touch for other reasons you can use some additional arguments for the dtoverlay in config.txt, these are:
+
+* `touchscreen-inverted-x`
+* `touchscreen-inverted-y`
+* `touchscreen-swapped-x-y`
+
+For example, to rotate touch 180 degrees you want to invert both the x and y axis, by changing the `dtoverlay=hyperpixel4` line in your `/boot/config.txt` to:
+
+```
+dtoverlay=hyperpixel4,touchscreen-inverted-x,touchscreen-inverted-y
+```
+

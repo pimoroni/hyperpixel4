@@ -1,0 +1,51 @@
+#!/bin/bash
+
+ORIENTATION=$1
+DEVICE="pointer:Goodix Capacitive TouchScreen"
+UDEV_FILE="/etc/udev/rules.d/98-hyperpixel4-calibration.rules"
+CONFIG_FILE="/boot/config.txt"
+
+function set_matrix {
+    printf "Setting matrix: $1 $2 $3 $4 $5 $6\n";
+    DISPLAY=:0.0 xinput set-prop "$DEVICE" "libinput Calibration Matrix" $1 $2 $3 $4 $5 $6 0 0 1
+
+    printf "Saving touch settings to $UDEV_FILE\n";
+    echo "ATTRS{name}==\"Goodix Capacitive TouchScreen\", ENV{LIBINPUT_CALIBRATION_MATRIX}=\"$1 $2 $3 $4 $5 $6\"" | sudo tee $UDEV_FILE > /dev/null
+
+    printf "Please reboot for changes to take effect!\n";
+}
+
+function set_display {
+    printf "Rotating display\n";
+    if [[ -f "$CONFIG_FILE" ]]; then
+	sudo sed -i "s/display_rotate=[0-3]/display_rotate=$1/" $CONFIG_FILE
+	sudo sed -i "s/#display_rotate=$1/display_rotate=$1/" $CONFIG_FILE
+    fi
+}
+
+if [ "$ORIENTATION" == "right" ]; then
+    set_display 1
+    set_matrix 0 1 0 -1 0 1
+    exit 0
+fi
+
+if [ "$ORIENTATION" == "left" ]; then
+    set_display 3
+    set_matrix 0 -1 1 1 0 0
+    exit 0
+fi
+
+if [ "$ORIENTATION" == "inverted" ]; then
+    set_display 2
+    set_matrix -1 0 1 0 -1 1
+    exit 0
+fi
+
+if [ "$ORIENTATION" == "normal" ]; then
+    set_display 0
+    set_matrix 1 0 0 0 1 0
+    exit 0
+fi
+
+printf "Unsupported orientation: $ORIENTATION\n";
+printf "Try one of: left, right, normal, inverted\n";
