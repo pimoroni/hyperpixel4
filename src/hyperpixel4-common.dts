@@ -45,43 +45,14 @@
         };
     };
     fragment@4 {
-        target = <&i2c_gpio>;
+        target-path = "/__symbols__";
         __overlay__ {
-            /* needed to avoid dtc warning */
-            #address-cells = <1>;
-            #size-cells = <0>;
-            ft6236: ft6236@14 {
-                compatible = "goodix,gt911";
-                reg = <0x14>;
-                interrupt-parent = <&gpio>;
-                interrupts = <27 2>;
-                touchscreen-size-x = <480>;
-                touchscreen-size-y = <800>;
-                touchscreen-x-mm = <51>;
-                touchscreen-y-mm = <85>;
-            };
-        };
-    };
-    fragment@5 {
-        target = <&ft6236>;
-        __overlay__ {
-            touchscreen-swapped-x-y;
-        };
-    };
-    fragment@6 {
-        target = <&ft6236>;
-        __dormant__ {
-            touchscreen-inverted-x;
-        };
-    };
-    fragment@7 {
-        target = <&ft6236>;
-        __overlay__ {
-            touchscreen-inverted-y;
+            i2c_gpio = "/i2c@0";
         };
     };
     __symbols__ {
         dpi18_pins = "/fragment@1/__overlay__/dpi18_pins";
+	i2c_gpio = "/fragment@3/__overlay__/i2c_gpio";
     };
     __local_fixups__ {
         fragment@0 {
@@ -89,10 +60,5 @@
                 pinctrl-0 = <0x0>;
             };
         };
-    };
-    __overrides__ {
-        touchscreen-inverted-x = <0>,"+6";
-        touchscreen-inverted-y = <0>,"-7";
-        touchscreen-swapped-x-y = <0>,"-5";
     };
 };
