@@ -6,8 +6,9 @@ BINARY_NAME="hyperpixel4-init"
 ROTATE_NAME="hyperpixel4-rotate"
 BINARY_PATH="/usr/bin"
 OVERLAY_PATH="/boot/overlays"
-OVERLAY_NAME="hyperpixel4.dtbo"
-OVERLAY_SRC="hyperpixel4.dts"
+
+# OVERLAY_NAME="hyperpixel4.dtbo"
+# OVERLAY_SRC="hyperpixel4.dts"
 
 CONFIG="/boot/config.txt"
 
@@ -28,14 +29,20 @@ if [ $(id -u) -ne 0 ]; then
 		exit 1
 fi
 
-if [ ! -f "dist/$OVERLAY_NAME" ]; then
+function build_overlay {
+if [ ! -f "dist/$1.dtbo" ]; then
 	if [ ! -f "/usr/bin/dtc" ]; then
 		printf "This script requires device-tree-compiler, please \"sudo apt install device-tree-compiler\"\n";
 		exit 1
 	fi
-	printf "Notice: building $OVERLAY_NAME\n";
-	dtc -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
+	printf "Notice: building $1.dtbo\n";
+	dtc -I dts -O dtb -o dist/$1.dtbo src/$1.dts > /dev/null 2>&1
 fi
+}
+
+build_overlay hyperpixel4-common
+build_overlay hyperpixel4-0x14
+build_overlay hyperpixel4-0x5d
 
 cp dist/$ROTATE_NAME $BINARY_PATH
 
@@ -52,10 +59,14 @@ else
 fi
 
 if [ -d "$OVERLAY_PATH" ]; then
-	cp dist/$OVERLAY_NAME $OVERLAY_PATH
-	printf "Installed: $OVERLAY_PATH/$OVERLAY_NAME\n"
+	cp dist/hyperpixel4-common.dtbo $OVERLAY_PATH
+	printf "Installed: $OVERLAY_PATH/hyperpixel4-common.dtbo\n"
+	cp dist/hyperpixel4-0x14.dtbo $OVERLAY_PATH
+	printf "Installed: $OVERLAY_PATH/hyperpixel4-0x14.dtbo\n"
+	cp dist/hyperpixel4-0x5d.dtbo $OVERLAY_PATH	
+	printf "Installed: $OVERLAY_PATH/hyperpixel4-0x5d.dtbo\n"
 else
-	printf "Warning: unable to copy $OVERLAY_NAME to $OVERLAY_PATH\n"
+	printf "Warning: unable to copy overlays to $OVERLAY_PATH\n"
 fi
 
 if [ -f "$CONFIG" ]; then
