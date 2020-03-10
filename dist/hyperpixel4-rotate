@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ORIENTATION=$1
-DEVICE="pointer:Goodix Capacitive TouchScreen"
+DEVICE="pointer:generic ft5x06 (11)"
 UDEV_FILE="/etc/udev/rules.d/98-hyperpixel4-calibration.rules"
 DISP_FILE="/usr/share/dispsetup.sh"
 
@@ -42,25 +42,25 @@ EOF
 
 if [ "$ORIENTATION" == "right" ]; then
     set_display $ORIENTATION
-    set_matrix 0 1 0 -1 0 1
+    set_matrix 0 -1 1 1 0 0
     exit 0
 fi
 
 if [ "$ORIENTATION" == "left" ]; then
     set_display $ORIENTATION
-    set_matrix 0 -1 1 1 0 0
+    set_matrix 0 1 0 -1 0 1
     exit 0
 fi
 
 if [ "$ORIENTATION" == "inverted" ]; then
     set_display $ORIENTATION
-    set_matrix -1 0 1 0 -1 1
+    set_matrix 1 0 0 0 1 0
     exit 0
 fi
 
 if [ "$ORIENTATION" == "normal" ]; then
     set_display $ORIENTATION
-    set_matrix 1 0 0 0 1 0
+    set_matrix -1 0 1 0 -1 1
     exit 0
 fi
 
