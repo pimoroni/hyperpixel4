@@ -52,7 +52,7 @@ hyperpixel4-rotate left
 Landscape mode, HDMI/power ports on the top:
   
 ```
-hyperpixel4-rotate left
+hyperpixel4-rotate right
 ```
 
 Portrait mode, USB ports on the top:
