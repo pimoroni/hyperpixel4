@@ -7,7 +7,7 @@ ROTATE_NAME="hyperpixel4-rotate"
 BINARY_PATH="/usr/bin"
 OVERLAY_PATH="/boot/overlays"
 OVERLAY_NAME="hyperpixel4.dtbo"
-OVERLAY_SRC="hyperpixel4.dts"
+OVERLAY_SRC="hyperpixel4-overlay.dts"
 
 CONFIG="/boot/config.txt"
 
@@ -32,7 +32,7 @@ if [ ! -f "dist/$OVERLAY_NAME" ]; then
 		exit 1
 	fi
 	printf "Notice: building $OVERLAY_NAME\n";
-	dtc -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
+	dtc -@ -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
 fi
 
 cp dist/$ROTATE_NAME $BINARY_PATH
