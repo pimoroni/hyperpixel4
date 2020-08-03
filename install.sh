@@ -32,7 +32,7 @@ if [ ! -f "dist/$1.dtbo" ]; then
 		exit 1
 	fi
 	printf "Notice: building $1.dtbo\n";
-	dtc -I dts -O dtb -o dist/$1.dtbo src/$1-overlay.dts > /dev/null 2>&1
+	dtc -@ -I dts -O dtb -o dist/$1.dtbo src/$1-overlay.dts > /dev/null 2>&1
 fi
 }
 
