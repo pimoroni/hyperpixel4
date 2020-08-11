@@ -7,13 +7,12 @@ ROTATE_NAME="hyperpixel4-rotate"
 BINARY_PATH="/usr/bin"
 OVERLAY_PATH="/boot/overlays"
 OVERLAY_NAME="hyperpixel4.dtbo"
-OVERLAY_SRC="hyperpixel4.dts"
+OVERLAY_SRC="hyperpixel4-overlay.dts"
 
 CONFIG="/boot/config.txt"
 
 CONFIG_LINES=(
 	"dtoverlay=hyperpixel4"
-	"gpio=0-25=a2"
 	"enable_dpi_lcd=1"
 	"dpi_group=2"
 	"dpi_mode=87"
@@ -32,7 +31,7 @@ if [ ! -f "dist/$OVERLAY_NAME" ]; then
 		exit 1
 	fi
 	printf "Notice: building $OVERLAY_NAME\n";
-	dtc -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
+	dtc -@ -I dts -O dtb -o dist/$OVERLAY_NAME src/$OVERLAY_SRC > /dev/null 2>&1
 fi
 
 cp dist/$ROTATE_NAME $BINARY_PATH

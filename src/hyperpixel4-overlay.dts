@@ -1,36 +1,31 @@
 /dts-v1/;
 /plugin/;
 / {
-    compatible = "brcm,bcm2708";
+    compatible = "brcm,bcm2835";
+
     fragment@0 {
-        target = <&fb>;
-        __overlay__ {
-            pinctrl-names = "default";
-            pinctrl-0 = <0x1>;
-        };
-    };
-    fragment@1 {
         target = <&gpio>;
         __overlay__ {
-            dpi18_pins {
+            dpi18_pins: dpi18_pins {
                 brcm,pins = <0 1 2 3 4 5 6 7 8 9 12 13 14 15 16 17 20 21 22 23 24 25>;
                 brcm,function = <0x6>;
                 brcm,pull = <0x0>;
-                phandle = <0x1>;
             };
         };
     };
-    fragment@2 {
+    fragment@1 {
         target-path = "/";
         __overlay__ {
             rpi_backlight: rpi_backlight {
                 compatible = "gpio-backlight";
                 gpios = <&gpio 19 0>;
                 default-on;
+                pinctrl-names = "default";
+                pinctrl-0 = <&dpi18_pins>;
             };
         };
     };
-    fragment@3 {
+    fragment@2 {
         target-path = "/";
         __overlay__ {
             i2c_gpio: i2c@0 {
@@ -44,7 +39,7 @@
             };
         };
     };
-    fragment@4 {
+    fragment@3 {
         target = <&i2c_gpio>;
         __overlay__ {
             /* needed to avoid dtc warning */
@@ -62,37 +57,27 @@
             };
         };
     };
-    fragment@5 {
-        target = <&ft6236>;
-        __overlay__ {
-            touchscreen-swapped-x-y;
-        };
-    };
-    fragment@6 {
+    fragment@4 {
         target = <&ft6236>;
         __dormant__ {
             touchscreen-inverted-x;
         };
     };
-    fragment@7 {
+    fragment@5 {
         target = <&ft6236>;
         __overlay__ {
             touchscreen-inverted-y;
         };
     };
-    __symbols__ {
-        dpi18_pins = "/fragment@1/__overlay__/dpi18_pins";
-    };
-    __local_fixups__ {
-        fragment@0 {
-            __overlay__ {
-                pinctrl-0 = <0x0>;
-            };
+    fragment@6 {
+        target = <&ft6236>;
+        __overlay__ {
+            touchscreen-swapped-x-y;
         };
     };
     __overrides__ {
-        touchscreen-inverted-x = <0>,"+6";
-        touchscreen-inverted-y = <0>,"-7";
-        touchscreen-swapped-x-y = <0>,"-5";
+        touchscreen-inverted-x = <0>,"+4";
+        touchscreen-inverted-y = <0>,"-5";
+        touchscreen-swapped-x-y = <0>,"-6";
     };
 };
