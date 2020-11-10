@@ -15,7 +15,6 @@ function set_matrix {
 
 function set_display {
     printf "Rotating display\n";
-    xrandr --output DSI-1 --rotate $1
     sudo python2 - <<EOF
 import os
 import stat
@@ -38,7 +37,22 @@ print("Saving display settings to {}".format(file))
 open(file, 'w').write(data)
 os.chmod(file, stat.S_IRWXU)
 EOF
+    if [ $? -eq 0 ]; then
+        xrandr --output DSI-1 --rotate $1
+        return 0
+    fi
+
+    printf "Failed to set display orientation. Make sure you're running Raspberry Pi OS desktop on a Pi 4.\n"
+    exit 0
 }
+
+printf "This rotate utility only works with the Raspberry Pi OS desktop version.\n"
+
+if [ "$DISPLAY" == "" ]; then
+    printf "You need to set a DISPLAY variable.\n";
+    printf "Try: DISPLAY=:0.0 hyperpixel4-rotate <orientation>\n"
+    exit 0
+fi
 
 if [ "$ORIENTATION" == "right" ]; then
     set_display $ORIENTATION
