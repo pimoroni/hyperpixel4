@@ -7,11 +7,13 @@ assignees: ''
 
 ---
 
-**NOTE**
+**PLEASE NOTE**
 
 :warning: GitHub issues are for reporting problems with the software, tech support do not monitor these.
 Our software team are smol and busy, and you will not receive a timely response.
 If you're having a hardware issue with your Hyperpixel 4, you should contact support@pimoroni.com.
+
+:warning: Hyperpixel 4 is only officially supported on Raspberry Pi OS. There are too many operating systems with too many quirks to begin to support them all. Issues relating to other operating systems will be closed.
 
 **Describe the bug**
 
