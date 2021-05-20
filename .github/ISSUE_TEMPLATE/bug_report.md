@@ -9,7 +9,7 @@ assignees: ''
 
 **NOTE**
 
-GitHub issues are for reporting problems with the software, tech support do not monitor these.
+:warning: GitHub issues are for reporting problems with the software, tech support do not monitor these.
 Our software team are smol and busy, and you will not receive a timely response.
 If you're having a hardware issue with your Hyperpixel 4, you should contact support@pimoroni.com.
 
