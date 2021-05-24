@@ -24,8 +24,8 @@ CONFIG_LINES=(
 	"display_default_lcd=1"
 	"dpi_group=2"
 	"dpi_mode=87"
-	"dpi_output_format=0x7f226"
-	"hdmi_timings=720 0 15 15 15 720 0 10 10 10 0 0 0 60 0 35113500 6"
+	"dpi_output_format=0x5f026"
+	"dpi_timings=720 0 20 20 40 720 0 15 15 15 0 0 0 60 0 36720000 4"
 )
 
 if [ $(id -u) -ne 0 ]; then
