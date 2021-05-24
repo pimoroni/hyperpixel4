@@ -21,9 +21,11 @@ Note: A HyperPixel4 setup for Pi 3B+ or earlier will not readily work if you mov
 Here's a list of active branches and which Pi/display combination they support:
 
 * [pi3](https://github.com/pimoroni/hyperpixel4/tree/pi3) - Pi 3B+ and earlier, HyperPixel4 Rectangular
-* [pi4](https://github.com/pimoroni/hyperpixel4/tree/pi4) - Pi 4, HyperPixel4 Rectangular, use `hyperpixel4-rotate` to rotate once installed
-* [square](https://github.com/pimoroni/hyperpixel4/tree/square) - Pi 3B+ and earlier, HyperPixel4 Square
-* [square-pi4](https://github.com/pimoroni/hyperpixel4/tree/square-pi4)  - Pi 4, HyperPixel4 Square
+* [pi4](https://github.com/pimoroni/hyperpixel4/tree/pi4) - Pi 4 & Pi 400, HyperPixel4 Rectangular, use `hyperpixel4-rotate` to rotate once installed
+* [square](https://github.com/pimoroni/hyperpixel4/tree/square) - Pi 3B+ and earlier, HyperPixel4 Square (for boards manufactured 2020 and earlier)
+* [square-pi4](https://github.com/pimoroni/hyperpixel4/tree/square-pi4)  - Pi 4 & Pi 400, HyperPixel4 Square (for boards manufactured 2020 and earlier)
+* [square-2021](https://github.com/pimoroni/hyperpixel4/tree/square-2021) - Pi 3B+ and earlier, HyperPixel4 Square (for boards manufactured 2021 and later)
+* [square-pi4-2021](https://github.com/pimoroni/hyperpixel4/tree/square-pi4-2021)  - Pi 4 & Pi 400, HyperPixel4 Square (for boards manufactured 2021 and later)
 
 To clone a specific branch to your Pi, run:
 
