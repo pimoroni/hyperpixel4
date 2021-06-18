@@ -1,22 +1,38 @@
 #!/bin/bash
 
 ORIENTATION=$1
-DEVICE="pointer:generic ft5x06 (11)"
-UDEV_FILE="/etc/udev/rules.d/98-hyperpixel4-calibration.rules"
+DEVICE="generic ft5x06 (11)"
+UDEV_FILE="/etc/udev/rules.d/98-hyperpixel4-square-calibration.rules"
 DISP_FILE="/usr/share/dispsetup.sh"
 
+function success() {
+    echo -e "$(tput setaf 2)$1$(tput sgr0)"
+}
+
+function inform() {
+    echo -e "$(tput setaf 6)$1$(tput sgr0)"
+}
+
+function warning() {
+    echo -e "$(tput setaf 1)$1$(tput sgr0)"
+}
+
 function set_matrix {
-    printf "Setting matrix: $1 $2 $3 $4 $5 $6\n";
-    xinput set-prop "$DEVICE" "libinput Calibration Matrix" $1 $2 $3 $4 $5 $6 0 0 1
-    
-    printf "Saving touch settings to $UDEV_FILE\n";
-    echo "ATTRS{name}==\"Goodix Capacitive TouchScreen\", ENV{LIBINPUT_CALIBRATION_MATRIX}=\"$1 $2 $3 $4 $5 $6\"" | sudo tee $UDEV_FILE > /dev/null
+    inform "Setting touch transform matrix: $1 $2 $3 $4 $5 $6";
+    xinput set-prop "pointer:$DEVICE" "libinput Calibration Matrix" $1 $2 $3 $4 $5 $6 0 0 1
+
+    inform "Saving touch settings to $UDEV_FILE";
+    echo "ATTRS{name}==\"$DEVICE\", ENV{LIBINPUT_CALIBRATION_MATRIX}=\"$1 $2 $3 $4 $5 $6\"" | sudo tee $UDEV_FILE > /dev/null
+    echo "ATTRS{name}==\"EP0110M09\", ENV{LIBINPUT_CALIBRATION_MATRIX}=\"$1 $2 $3 $4 $5 $6\"" | sudo tee -a $UDEV_FILE > /dev/null
 }
 
 function set_display {
-    printf "Rotating display\n";
+    inform "Rotating display $1";
     xrandr --output DSI-1 --rotate $1
-    sudo python2 - <<EOF
+
+    inform "Persisting display settings to $DISP_FILE";
+    sudo chown `whoami` $DISP_FILE
+    python2 - <<EOF
 import os
 import stat
 from screenlayout import xrandr
@@ -34,11 +50,20 @@ template = ["#!/bin/sh",
 x = xrandr.XRandR()
 x.load_from_x()
 data = x.save_to_shellscript_string(template=template)
-print("Saving display settings to {}".format(file))
 open(file, 'w').write(data)
 os.chmod(file, stat.S_IRWXU)
 EOF
+    sudo chown root $DISP_FILE
+    sudo chmod 755 $DISP_FILE
 }
+
+printf "HyperPixel 4: Square - Display/Touch Rotation\n"
+warning "This rotate utility only works with the Raspberry Pi OS desktop version."
+
+if [ "$DISPLAY" == "" ]; then
+    warning "No DISPLAY variable set, trying :0.0"
+    export DISPLAY=:0.0
+fi
 
 if [ "$ORIENTATION" == "right" ]; then
     set_display $ORIENTATION
