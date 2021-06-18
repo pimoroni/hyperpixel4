@@ -88,6 +88,77 @@ This will rotate both the display and the touchscreen input to match.
 
 If you're using a non-touchscreen HyperPixel4 you need only change `display_rotate`.
 
+## Totally Manual Rotation
+
+:warning: for Xorg-based operating systems running on Pi 4 and Pi 400
+:warning: must have `dtoverlay=vc4-fkms-v3d` in `/boot/config.txt`
+
+### Rotation on the fly
+
+You can use xrandr and xinput to rotate the display and touchscreen in turn.
+
+For HyperPixel Square, substitute the device name with "pointer:generic ft5x06 (11)".
+
+#### Left
+
+```
+DISPLAY=:0.0 xrandr --output DSI-1 --rotate left
+DISPLAY=:0.0 xinput set-prop "pointer:Goodix Capacitive TouchScreen" "libinput Calibration Matrix" 0 -1 1 1 0 0 0 0 1
+```
+
+#### Right
+
+```
+DISPLAY=:0.0 xrandr --output DSI-1 --rotate right
+DISPLAY=:0.0 xinput set-prop "pointer:Goodix Capacitive TouchScreen" "libinput Calibration Matrix" 0 1 0 -1 0 1 0 0 1
+```
+
+#### Normal
+
+```
+DISPLAY=:0.0 xrandr --output DSI-1 --rotate normal
+DISPLAY=:0.0 xinput set-prop "pointer:Goodix Capacitive TouchScreen" "libinput Calibration Matrix" 1 0 0 0 1 0 0 0 1
+```
+
+#### Inverted
+
+```
+DISPLAY=:0.0 xrandr --output DSI-1 --rotate inverted
+DISPLAY=:0.0 xinput set-prop "pointer:Goodix Capacitive TouchScreen" "libinput Calibration Matrix" -1 0 1 0 -1 1 0 0 1
+```
+
+### Persisting Rotation
+
+Add the relevant settings from above into `/usr/share/X11/xorg.conf.d/88-hyperpixel4.conf`.
+
+You will need the device name:
+
+* "Goodix Capacitive TouchScreen" for HyperPixel 4 Rectangular
+* "generic ft5x06 (11)" for HyperPixel 4 Square
+
+And the 9 numbers from the "Calibration Matrix", eg: `-1 0 1 0 -1 1 0 0 1`
+
+Plus the rotation direction for the monitor.
+
+```
+Section "InputClass"
+	Identifier "libinput HyperPixel4 Rectangular"
+	MatchProduct "Goodix Capacitive TouchScreen"
+	Option "CalibrationMatrix" "0 -1 1 1 0 0 0 0 1"
+EndSection
+
+Section "Monitor"
+	Identifier "DSI-1"
+	Option "Rotate" "left"
+EndSection
+```
+
+If you're using lightdm (the default window manager on Raspberry Pi OS) and it's calling `/usr/share/dispsetup.sh` you'll need to either disable that call in `/etc/lightdm/lightdm.conf` or change `dispsetup.sh` to just `exit 0`. Removing `dispsetup.sh` will break lightdm and boot you to a black screen of death.
+
+* :warning: Running "Screen Configuration" will re-create `dispsetup.sh` and override your Xorg settings
+* :warning: Removing `dispsetup.sh` from `/etc/lightdm/lightdm.conf` will prevent "Screen Configuration" settings for persisting.
+* You should probably use `hyperpixel4-rotate` unless you really know what you're doing!
+
 ## Troubleshooting
 
 Where possible we are collecting known FAQs under the `notice` label in our issue tracker.
