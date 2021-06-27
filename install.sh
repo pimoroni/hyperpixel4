@@ -10,9 +10,7 @@ OVERLAY_PATH="/boot/overlays"
 CONFIG="/boot/config.txt"
 
 CONFIG_LINES=(
-	"dtoverlay=hyperpixel4-common"
-	"dtoverlay=hyperpixel4-0x14"
-	"dtoverlay=hyperpixel4-0x5d"
+	"dtoverlay=hyperpixel4"
 	"enable_dpi_lcd=1"
 	"dpi_group=2"
 	"dpi_mode=87"
@@ -36,9 +34,7 @@ if [ ! -f "dist/$1.dtbo" ]; then
 fi
 }
 
-build_overlay hyperpixel4-common
-build_overlay hyperpixel4-0x14
-build_overlay hyperpixel4-0x5d
+build_overlay hyperpixel4
 
 cp dist/$ROTATE_NAME $BINARY_PATH
 
@@ -55,12 +51,8 @@ else
 fi
 
 if [ -d "$OVERLAY_PATH" ]; then
-	cp dist/hyperpixel4-common.dtbo $OVERLAY_PATH
-	printf "Installed: $OVERLAY_PATH/hyperpixel4-common.dtbo\n"
-	cp dist/hyperpixel4-0x14.dtbo $OVERLAY_PATH
-	printf "Installed: $OVERLAY_PATH/hyperpixel4-0x14.dtbo\n"
-	cp dist/hyperpixel4-0x5d.dtbo $OVERLAY_PATH	
-	printf "Installed: $OVERLAY_PATH/hyperpixel4-0x5d.dtbo\n"
+	cp dist/hyperpixel4.dtbo $OVERLAY_PATH
+	printf "Installed: $OVERLAY_PATH/hyperpixel4.dtbo\n"
 else
 	printf "Warning: unable to copy overlays to $OVERLAY_PATH\n"
 fi
