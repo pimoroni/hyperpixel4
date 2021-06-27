@@ -12,9 +12,7 @@ OVERLAY_SRC="hyperpixel4.dts"
 CONFIG="/boot/config.txt"
 
 CONFIG_LINES=(
-	"dtoverlay=hyperpixel4-common"
-	"dtoverlay=hyperpixel4-0x14"
-	"dtoverlay=hyperpixel4-0x5d"
+	"dtoverlay=hyperpixel4"
 	"gpio=0-25=a2"
 	"enable_dpi_lcd=1"
 	"dpi_group=2"
