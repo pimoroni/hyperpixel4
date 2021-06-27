@@ -1,7 +1,7 @@
 build:
-	dtc -I dts -O dtb -Wno-unit_address_vs_reg -o hyperpixel4-common.dtbo hyperpixel4-common.dts
-	dtc -I dts -O dtb -Wno-unit_address_vs_reg -o hyperpixel4-0x14.dtbo hyperpixel4-0x14.dts
-	dtc -I dts -O dtb -Wno-unit_address_vs_reg -o hyperpixel4-0x5d.dtbo hyperpixel4-0x5d.dts
+	dtc -I dts -O dtb -Wno-unit_address_vs_reg -o hyperpixel4-common.dtbo hyperpixel4-common-overlay.dts
+	dtc -I dts -O dtb -Wno-unit_address_vs_reg -o hyperpixel4-0x14.dtbo hyperpixel4-0x14-overlay.dts
+	dtc -I dts -O dtb -Wno-unit_address_vs_reg -o hyperpixel4-0x5d.dtbo hyperpixel4-0x5d-overlay.dts
 
 install:
 	cp hyperpixel4-*.dtbo /boot/overlays/
