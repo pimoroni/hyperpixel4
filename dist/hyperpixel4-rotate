@@ -9,6 +9,7 @@ DISP_FILE="/usr/share/dispsetup.sh"
 XORG_TOUCH_CONF_FILE="/usr/share/X11/xorg.conf.d/88-hyperpixel4-square-touch.conf"
 XORG_CONF_FILE="/usr/share/X11/xorg.conf.d/88-dsi-1-rotate.conf"
 LIGHTDM_CONF_FILE="/etc/lightdm/lightdm.conf"
+XHOST_AUTH_DISABLED=false
 
 function success() {
     echo -e "$(tput setaf 2)$1$(tput sgr0)"
@@ -85,7 +86,23 @@ function set_matrix {
     echo "ATTRS{name}==\"EP0110M09\", ENV{LIBINPUT_CALIBRATION_MATRIX}=\"$1 $2 $3 $4 $5 $6\"" | sudo tee -a $UDEV_FILE > /dev/null
 }
 
+function xhost_auth {
+    if [ "$1" == "disable" ]; then
+        xhost | grep disabled > /dev/null
+        if [ $? -ne 0 ]; then
+            xhost + > /dev/null
+	    warning "Disabling xhost access control..."
+            XHOST_AUTH_DISABLED=true
+        fi
+    fi
+    if [ "$1" == "enable" ] && [ "$XHOST_AUTH_DISABLED" = true ]; then
+        xhost - > /dev/null
+	warning "Re-enabling xhost access control..."
+    fi
+}
+
 function set_display {
+    xhost_auth "disable"
     inform "Rotating display $1";
     xrandr --output DSI-1 --rotate $1
 
@@ -125,6 +142,8 @@ EOF
     if [ $STATUS -eq 1 ]; then
         warning "Failed to persist display orientation."
         warning "Make sure you're running Rasperry Pi OS desktop on a Pi 4 or Pi 400"
+        xhost_auth "enable"
+        exit 1
     fi
 
     if [ -f $XORG_CONF_FILE ]; then
@@ -137,6 +156,7 @@ EOF
         warning "You might want to remove this file!"
     fi
 
+    xhost_auth "enable"
 }
 
 printf "HyperPixel 4: Square - Display/Touch Rotation\n"
@@ -145,7 +165,7 @@ printf "This rotate utility only works with the Raspberry Pi OS desktop version 
 compatibility_check
 
 if [ "$DISPLAY" == "" ]; then
-    inform "No DISPLAY variable set, trying :0.0"
+    warning "No DISPLAY variable set, trying :0.0"
     export DISPLAY=:0.0
 fi
 
