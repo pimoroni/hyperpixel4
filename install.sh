@@ -61,10 +61,10 @@ if [ -f "$CONFIG" ]; then
 	NEWLINE=0
 	for ((i = 0; i < ${#CONFIG_LINES[@]}; i++)); do
 		CONFIG_LINE="${CONFIG_LINES[$i]}"
-		grep -e "^#$CONFIG_LINE" $CONFIG > /dev/null
+		grep -E "^(#|# )$CONFIG_LINE[$ #]" $CONFIG > /dev/null
 		STATUS=$?
 		if [ $STATUS -eq 1 ]; then
-			grep -e "^$CONFIG_LINE" $CONFIG > /dev/null
+			grep -E "^$CONFIG_LINE([ #]|$)" $CONFIG > /dev/null
 			STATUS=$?
 			if [ $STATUS -eq 1 ]; then
 				# Line is missing from config file
@@ -80,7 +80,7 @@ if [ -f "$CONFIG" ]; then
 				printf "Skipped: $CONFIG_LINE already exists in $CONFIG\n"
 			fi
 		else
-			sed $CONFIG -i -e "s/^#$CONFIG_LINE/$CONFIG_LINE/"
+			sed -i -r -E "s/^(#|# )$CONFIG_LINE([# ]|$)/$CONFIG_LINE\2/" $CONFIG
 			printf "Config: Uncommented $CONFIG_LINE in $CONFIG\n"
 		fi
 	done
