@@ -36,12 +36,23 @@ If you want to change the position of your HyperPixel4 in a multi-display setup,
 
 If you're having trouble with your touch being 180 degrees rotated to your screen, or need to rotate the touch for other reasons you can use some additional arguments for the dtoverlay in config.txt, these are:
 
-* `touchscreen-inverted-x`
-* `touchscreen-inverted-y`
-* `touchscreen-swapped-x-y`
+* `touchscreen-inverted-x=1`
+* `touchscreen-inverted-y=1`
+* `touchscreen-swapped-x-y=1`
 
 For example, to rotate touch 180 degrees you want to invert both the x and y axis, by changing the `dtoverlay=hyperpixel4` line in your `/boot/config.txt` to:
 
 ```
-dtoverlay=hyperpixel4,touchscreen-inverted-x,touchscreen-inverted-y
+dtoverlay=hyperpixel4,touchscreen-inverted-x=1,touchscreen-inverted-y=1
+```
+
+:warning: Beware that config.txt has an 80 line length limit!
+
+You can use `dtparam` to overcome this:
+
+```
+dtoverlay=hyperpixel4
+dtparam=touchscreen-inverted-x=1
+dtparam=touchscreen-inverted-y=1
+dtparam=swapped-x-y=1
 ```
