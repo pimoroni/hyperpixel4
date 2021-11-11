@@ -6,22 +6,45 @@ BINARY_NAME="hyperpixel4-init"
 ROTATE_NAME="hyperpixel4-rotate"
 BINARY_PATH="/usr/bin"
 OVERLAY_PATH="/boot/overlays"
+DEB_NAME="panel-pimoroni-hyperpixel4-dkms_1.0_armhf.deb"
 
 CONFIG="/boot/config.txt"
 
 CONFIG_LINES=(
-	"dtoverlay=hyperpixel4"
-	"enable_dpi_lcd=1"
-	"dpi_group=2"
-	"dpi_mode=87"
-	"dpi_output_format=0x7f216"
-	"dpi_timings=480 0 10 16 59 800 0 15 113 15 0 0 0 60 0 32000000 6"
+	"dtoverlay=vc4-kms-dpi-hyperpixel4"
+	"dtoverlay=hyperpixel4-touch"
 )
 
 if [ $(id -u) -ne 0 ]; then
 		printf "Script must be run as root. Try 'sudo ./install.sh'\n"
 		exit 1
 fi
+
+function apt_pkg_install {
+	PACKAGES=()
+	PACKAGES_IN=("$@")
+	for ((i = 0; i < ${#PACKAGES_IN[@]}; i++)); do
+		PACKAGE="${PACKAGES_IN[$i]}"
+		if [ "$PACKAGE" == "" ]; then continue; fi
+		printf "Checking for $PACKAGE\n"
+		dpkg -L $PACKAGE > /dev/null 2>&1
+		if [ "$?" == "1" ]; then
+			PACKAGES+=("$PACKAGE")
+		fi
+	done
+	PACKAGES="${PACKAGES[@]}"
+	if ! [ "$PACKAGES" == "" ]; then
+		echo "Installing missing packages: $PACKAGES"
+		if [ ! $APT_HAS_UPDATED ]; then
+			apt update
+			APT_HAS_UPDATED=true
+		fi
+		apt install -y $PACKAGES
+		if [ -f "$UNINSTALLER" ]; then
+			echo "apt uninstall -y $PACKAGES"
+		fi
+	fi
+}
 
 function build_overlay {
 if [ ! -f "dist/$1.dtbo" ]; then
@@ -30,11 +53,18 @@ if [ ! -f "dist/$1.dtbo" ]; then
 		exit 1
 	fi
 	printf "Notice: building $1.dtbo\n";
-	dtc -@ -I dts -O dtb -o dist/$1.dtbo src/$1-overlay.dts > /dev/null 2>&1
+	dtc -@ -I dts -O dtb -o dist/$1.dtbo src/$1-overlay.dts # > /dev/null 2>&1
 fi
 }
 
-build_overlay hyperpixel4
+printf "Installing dkms and kernel headers, hang in there! This may take a while!...\n"
+DEPS=( "dkms" "raspberrypi-kernel-headers" )
+apt_pkg_install "dkms" "raspberrypi-kernel-headers", "python3-rpio.gpio"
+
+sudo dpkg -i dist/$DEB_NAME
+
+build_overlay vc4-kms-dpi-hyperpixel4
+build_overlay hyperpixel4-touch
 
 cp dist/$ROTATE_NAME $BINARY_PATH
 
@@ -51,8 +81,10 @@ else
 fi
 
 if [ -d "$OVERLAY_PATH" ]; then
-	cp dist/hyperpixel4.dtbo $OVERLAY_PATH
-	printf "Installed: $OVERLAY_PATH/hyperpixel4.dtbo\n"
+	cp dist/hyperpixel4-touch.dtbo $OVERLAY_PATH
+	cp dist/vc4-kms-dpi-hyperpixel4.dtbo $OVERLAY_PATH
+	printf "Installed: $OVERLAY_PATH/hyperpixel4-touch.dtbo\n"
+	printf "Installed: $OVERLAY_PATH/vc4-kms-dpi-hyperpixel4.dtbo\n"
 else
 	printf "Warning: unable to copy overlays to $OVERLAY_PATH\n"
 fi

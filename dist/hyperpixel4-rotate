@@ -24,10 +24,10 @@ function warning() {
 }
 
 function compatibility_check {
-    grep -e "^dtoverlay=vc4-fkms-v3d.*" /boot/config.txt > /dev/null
+    grep -e "^dtoverlay=vc4-kms-v3d.*" /boot/config.txt > /dev/null
     if [ $? -ne 0 ]; then
         warning "Rotation requires hardware support on the Pi 4 or Pi 400"
-        warning "Ensure \"dtoverlay=vc4-fkms-v3d\" is enabled in /boot/config.txt"
+        warning "Ensure \"dtoverlay=vc4-kms-v3d\" is enabled in /boot/config.txt"
         exit 1
     fi
 }
@@ -109,7 +109,7 @@ function set_display {
 
     inform "Saving display settings to $DISP_FILE";
     sudo chown `whoami` $DISP_FILE
-    python2 - <<EOF
+    python - <<EOF
 import os
 import stat
 from screenlayout import xrandr

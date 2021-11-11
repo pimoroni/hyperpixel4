@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import time
 import RPi.GPIO as GPIO
 
@@ -65,7 +65,7 @@ def setup_lcd():
     # HSPL = 0 (horizontal sync polarity)
     # DPL = 0 (PCLK polarity)
     # EPL = 1 (data enable polarity)
-    write_register(0x21, 0x0D)
+    write_register(0x21, 0x0F)
     # resolution control (0x02 = 480x800)
     write_register(0x30, 0x02)
     # display inversion control (0x00 = column inversion)

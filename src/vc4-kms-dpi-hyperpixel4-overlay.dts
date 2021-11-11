@@ -1,0 +1,36 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2835";
+
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            panel: panel {
+		compatible = "pimoroni,hyperpixel4";
+
+                port {
+                    panel_in: endpoint {
+                        remote-endpoint = <&dpi_out>;
+                    };
+                };
+            };
+        };
+    };
+    fragment@1 {
+        target = <&dpi>;
+        __overlay__  {
+            status = "okay";
+
+            pinctrl-names = "default";
+            pinctrl-0 = <&dpi_18bit_cpadhi_gpio0>;
+
+            port {
+                dpi_out: endpoint {
+                    remote-endpoint = <&panel_in>;
+                };
+            };
+        };
+    };
+};
