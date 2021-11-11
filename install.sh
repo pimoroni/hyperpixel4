@@ -59,7 +59,7 @@ fi
 
 printf "Installing dkms and kernel headers, hang in there! This may take a while!...\n"
 DEPS=( "dkms" "raspberrypi-kernel-headers" )
-apt_pkg_install "dkms" "raspberrypi-kernel-headers", "python3-rpio.gpio"
+apt_pkg_install "dkms" "raspberrypi-kernel-headers", "python3-rpi.gpio"
 
 sudo dpkg -i dist/$DEB_NAME
 
