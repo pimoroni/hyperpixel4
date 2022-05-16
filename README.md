@@ -1,8 +1,16 @@
 # HyperPixel 4.0" Drivers
 
-HyperPixel 4.0 is an 800x480 or 720x720 pixel display for the Raspberry Pi, with optional capacitive touchscreen.
+HyperPixel 4.0 is an 800x480 or 720x720 pixel DPI display for Raspberry Pi, with optional capacitive touchscreen. The drivers/instructions in this repo are written for and tested with Raspberry Pi OS, and are not guaranteed to work with other operating systems.
 
-## Installing / Uninstalling
+## Installing / Uninstalling (Bullseye / Linux Kernel 5.15 or later)
+
+Raspberry Pi OS Bullseye includes major changes to how DPI display drivers work. If you're using an image dated 04/04/2022 or later, it will come with Hyperpixel drivers baked in and you don't need to run the legacy installer. You can set up display and touch by adding a few lines to your boot/config.txt:
+
+[PSA: HyperPixel 4 (Square & Rectangular) on Raspberry Pi OS 2022-04-04](https://github.com/pimoroni/hyperpixel4/issues/177)
+
+⚠️Note that touch rotation commands will not currently work with on the square variant, and that the current kernel drivers will only work with newer square boards (marked Hyperpixel XP).
+
+## Installing / Uninstalling (Legacy)
 
 This repository contains several branches for different combinations of Pi and HyperPixel4 boards.
 
