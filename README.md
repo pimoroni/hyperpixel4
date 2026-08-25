@@ -1,5 +1,15 @@
 # HyperPixel 4.0" Drivers
 
+:warning: These drivers are deprecated and superceded by the dtoverlays built into Raspberry Pi OS.
+
+In most cases you should not need more than `dtoverlay=vc4-kms-dpi-hyperpixel4` or `dtoverlay=vc4-kms-dpi-hyperpixel4sq` for square, and make sure to disable I2C and SPI.
+
+This repository mostly contains a bunch of legacy band aids and fixes around versions of Raspberry Pi OS and its desktop environment that have since been obsoleted or replaced.
+
+The legacy drivers here are kept for pre-2021 HyperPixel 4 Square and for older OS releases. They are not maintained.
+
+----
+
 HyperPixel 4.0 is an 800x480 or 720x720 pixel DPI display for Raspberry Pi, with optional capacitive touchscreen. The drivers/instructions in this repo are written for and tested with Raspberry Pi OS, and are not guaranteed to work with other operating systems.
 
 ## Installing / Uninstalling (Bullseye / Linux Kernel 5.15 or later)
@@ -169,17 +179,18 @@ If you're using lightdm (the default window manager on Raspberry Pi OS) and it's
 
 ## Troubleshooting
 
-Where possible we are collecting known FAQs under the `notice` label in our issue tracker.
+⚠️ **This repository is archived.** HyperPixel 4 is supported by drivers that ship as part of
+Raspberry Pi OS — see [FAQ.md](FAQ.md), which consolidates the answers previously kept under
+the `notice` label in this issue tracker.
 
-[`Notice` Issue Tracker](https://github.com/pimoroni/hyperpixel4/issues?q=is%3Aissue+label%3Anotice+)
+* **Setup and troubleshooting:** [FAQ.md](FAQ.md)
+* **Hardware faults and replacements:** support@pimoroni.com
+* **Everything else:** [forums.pimoroni.com](https://forums.pimoroni.com)
 
-If your issue is not covered by one of these provided by our team and community 
-then we ask you to provide some debugging information using the following oneliner:
+The debug script still works if support ask you for its output:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/pimoroni/hyperpixel4/master/hyperpixel4-debug.sh | bash
 ```
-
-Then [file a bug report](https://github.com/pimoroni/hyperpixel4/issues/new/choose).
 
 
